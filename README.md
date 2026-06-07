@@ -1,48 +1,258 @@
-## **HR-ASSIST Agentic AI System**
+# HRMS AI Assistant
 
-\---
+An AI-powered Human Resource Management System (HRMS) built using Streamlit, Python, MCP (Model Context Protocol), and SQLite. The application combines traditional HR management workflows with conversational AI, allowing users to perform HR operations through both a graphical interface and natural language interactions.
 
-HR ASSIST is an Agentic AI system designed to help HR teams automate routine workflows. This example demonstrates automation of the employee onboarding process, streamlining tasks that typically require manual intervention.
+---
 
-In terms of technical architecture, for MCP client we use Claude Desktop and the code base here represents the MCP server with necessary tools that will be used by MCP client
+## Features
 
-🛠️ Setup Instructions
+### AI HR Assistant
 
-To set up and run HR ASSIST, follow these steps:
+* Chat-based interface powered by LLMs and MCP tools.
+* Supports natural language HR requests.
+* Automatically invokes the appropriate HR tool based on user intent.
+* Handles multi-step workflows through tool orchestration.
 
-* Configure claude\_desktop\_config.json
-Add the following configuration to your claude\_desktop\_config.json file:
+### Employee Management
 
-&#x20;   ```json
-    {
-    "mcpServers": {
-        "hr-assist": {
-        "command": "C:\\\\Users\\\\dhaval\\\\.local\\\\bin\\\\uv",
-        "args": \[
-            "--directory",
-            "C::\\\\code\\\\atliq-hr-assist",
-            "run",
-            "server.py"
-        ],
-        "env": {
-            "CB\_EMAIL": "YOUR\_EMAIL",
-            "CB\_EMAIL\_PWD": "YOUR\_APP\_PASSWORD"
-        }
-        }
-    }
-    }
-    ```
+* View all employees.
+* Add new employees.
+* Update employee details.
+* Fetch employee information.
+* Validate unique employee email addresses.
 
-* Replace YOUR\_EMAIL with your actual email.
-* Replace YOUR\_APP\_PASSWORD with your email provider’s app-specific password (e.g., for Gmail).
-* Run `uv init` and `uv add mcp\[cli]` as per the video tutorial in the course.
+### Leave Management
 
-**Usage**
+* View leave balances.
+* Apply for leaves using a calendar-based date selector.
+* Prevent duplicate leave applications.
+* Prevent leave applications for past dates.
+* View employee leave history.
 
-* Click on the `+` icon and select the `Add from hr-assist` option, and send the request.
-* Fill the details for the new employee:
+### Ticket Management
 
-<img src="resources\\image.jpg" alt="Claude desktop prompt with fields" style="width:auto;height:300px;padding-left:30px">
+* Create HR or IT support tickets.
+* Track ticket status.
+* Update ticket status.
+* Filter tickets by employee and status.
 
-Alternatively, you can draft a custom prompt and let the agent take over.
+### Meeting Management
 
+* Schedule meetings for multiple employees.
+* Configure meeting duration and topic.
+* Prevent scheduling meetings in the past.
+* Cancel scheduled meetings.
+* Track meeting status.
+
+### Employee Onboarding Workflow
+
+A dedicated MCP tool automates employee onboarding by:
+
+1. Creating a new employee record.
+2. Initializing leave balances.
+3. Creating hardware request tickets.
+4. Scheduling onboarding meetings.
+
+This enables multiple HR actions to be completed through a single request.
+
+---
+
+## Architecture
+
+### UI Layer
+
+* Streamlit
+* Sidebar navigation
+* Chat interface
+* Data management screens
+
+### AI Layer
+
+* Groq LLM
+* MCP (Model Context Protocol)
+* Tool orchestration
+* Intent routing
+
+### Business Layer
+
+* EmployeeManager
+* LeaveManager
+* TicketManager
+* MeetingManager
+
+### Data Layer
+
+* SQLite Database
+* Employee Records
+* Leave History
+* Tickets
+* Meetings
+
+---
+
+## Tech Stack
+
+| Category               | Technologies                 |
+| ---------------------- | ---------------------------- |
+| Frontend               | Streamlit                    |
+| Backend                | Python                       |
+| AI/LLM                 | Groq                         |
+| Agent Framework        | MCP (Model Context Protocol) |
+| Database               | SQLite                       |
+| Validation             | Pydantic                     |
+| Environment Management | python-dotenv                |
+
+---
+
+## Project Structure
+
+```text
+HRMS-Assist/
+│
+├── app.py
+├── server.py
+├── emails.py
+│
+├── HRMS/
+│   ├── employee_manager.py
+│   ├── leave_manager.py
+│   ├── ticket_manager.py
+│   ├── meeting_manager.py
+│   ├── database.py
+│   └── schemas.py
+│
+├── hrms.db
+├── .env
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone <repository-url>
+cd HRMS-Assist
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Environment
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Mac/Linux
+
+```bash
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+```
+
+---
+
+## Run Application
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## Sample Queries
+
+### Employee Operations
+
+```text
+Add a new employee named John Doe with manager E001 and email john@company.com
+```
+
+```text
+Get details of employee E005
+```
+
+```text
+Update email of employee E010 to employee10@company.com
+```
+
+### Leave Operations
+
+```text
+Apply leave for employee E003 from June 20 to June 22
+```
+
+```text
+Show leave balance for employee E003
+```
+
+### Ticket Operations
+
+```text
+Create a hardware request ticket for employee E004
+```
+
+```text
+Update ticket T0003 status to Closed
+```
+
+### Meeting Operations
+
+```text
+Schedule an onboarding meeting for employee E007 tomorrow at 10 AM
+```
+
+---
+
+## Key Highlights
+
+* Conversational AI integrated with enterprise workflows.
+* MCP-based tool orchestration.
+* Multi-step employee onboarding automation.
+* Real-time data management through Streamlit.
+* SQLite-backed persistence layer.
+* Modular architecture with separate managers for each HR domain.
+
+---
+
+## Future Enhancements
+
+* Role-Based Access Control (RBAC)
+* Email Notifications
+* Department Management
+* Payroll Integration
+* Employee Performance Tracking
+* Cloud Database Support
+* Multi-user Authentication
+
+---
+
+## Author
+
+**Charishma Vanukuri**
+
+AI-Powered HRMS Assistant built as a hands-on project to explore MCP, LLM Tool Calling, Workflow Automation, and Full-Stack Application Development.
