@@ -12,6 +12,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from groq import Groq
 import pkg_resources
+raise Exception("I AM RUNNING THE NEW APP")
 
 installed_packages = sorted(
     [f"{pkg.key}=={pkg.version}" for pkg in pkg_resources.working_set]
