@@ -11,6 +11,15 @@ from datetime import datetime, date, time, timedelta
 import streamlit as st
 from dotenv import load_dotenv
 from groq import Groq
+import pkg_resources
+
+installed_packages = sorted(
+    [f"{pkg.key}=={pkg.version}" for pkg in pkg_resources.working_set]
+)
+
+st.write("Installed packages:")
+st.write(installed_packages)
+st.stop()
 
 # Ensure the repo root is on sys.path so we can import server.py from the frontend folder.
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
