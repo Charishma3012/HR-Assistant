@@ -464,7 +464,7 @@ def render_chat() -> None:
                 new_email = st.text_input("Email", key="new_employee_email")
 
                 add_submit = st.form_submit_button(
-                    "Add employee", key="add_employee_submit"
+                    "Add employee"
                 )
 
             if add_submit:
@@ -514,7 +514,7 @@ def render_chat() -> None:
                 updated_email = st.text_input("Updated email", key="update_emp_email")
 
                 update_submit = st.form_submit_button(
-                    "Update employee", key="update_employee_submit"
+                    "Update employee"
                 )
 
             if update_submit:
@@ -588,7 +588,7 @@ def render_chat() -> None:
                 ticket_item = st.text_input("Issue type", key="ticket_item")
                 ticket_reason = st.text_area("Reason", key="ticket_reason")
                 create_submit = st.form_submit_button(
-                    "Create ticket", key="create_ticket_submit"
+                    "Create ticket"
                 )
             if create_submit:
                 if not str(ticket_emp_id).strip():
@@ -629,7 +629,7 @@ def render_chat() -> None:
                     key="update_ticket_status",
                 )
                 update_ticket_submit = st.form_submit_button(
-                    "Update status", key="update_ticket_submit"
+                    "Update status"
                 )
 
             if update_ticket_submit:
@@ -710,7 +710,7 @@ def render_chat() -> None:
                     key="leave_dates",
                 )
                 apply_submit = st.form_submit_button(
-                    "Apply leave", key="apply_leave_submit"
+                    "Apply leave"
                 )
 
             if apply_submit:
@@ -831,8 +831,7 @@ def render_chat() -> None:
                 )
 
                 schedule_submit = st.form_submit_button(
-                    "Schedule meeting",
-                    key="schedule_meeting_submit",
+                    "Schedule meeting"
                 )
 
             if schedule_submit:
@@ -887,8 +886,7 @@ def render_chat() -> None:
                     key="cancel_meeting_code",
                 )
                 cancel_submit = st.form_submit_button(
-                    "Cancel meeting",
-                    key="cancel_meeting_submit",
+                    "Cancel meeting"
                 )
 
             if cancel_submit:
